@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Star Wars API</title>
+</head>
+
+<body>
+
+  <main id="main" class="container-fluid">
+
+    <div id="title-area" >
+      <img id="title-image" src="images\Star-Wars-Logo-Art-Small.jpg" alt="star wars logo">
+      <h2 id="subtitle">Encyclopedia</h2>
+    </div>
+
+
+    <div id="user-interface" class="row highlight ">
+      <div class="col-sm">
+        <a id="previous-page" class="col button page-button">Previous</a>
+      </div>
+
+      <div class="col-sm">
+        <a id="next-page" class="col button page-button">Next</a>
+      </div>
+
+      <div class="col-sm">
+      <form id="search-form">
+        
+          <select name="category" id="category" class="col ui-control ">
+            <option value="films">
+              Films
+            </option>
+            <option value="people/">
+              People
+            </option>
+            <option value="planets">
+              Planets
+            </option>
+            <option value="species">
+              Species
+            </option>
+            <option value="starships">
+              Starships
+            </option>
+            <option value="vehicles">
+              Vehicles
+            </option>
+          </select>
+        </div>
+
+        <div class="col-sm">
+          <input type="search" id="search-box" class="col ui-control" placeholder="type search..." value="">
+        </div>
+        <div class="col-sm highlight">
+          <a id="show-results" class="col button">Search</a>
+        </div>
+      </form>
+
+    </div>
+
+
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+    crossorigin="anonymous"></script>
+  <script src="scripts.js"></script>
+</body>
+
+</html>

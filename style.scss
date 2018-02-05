@@ -1,0 +1,222 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(22, 22, 22);
+    color: antiquewhite;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    font-weight: normal;
+    letter-spacing: -1px;
+    color: #34495E;
+}
+
+h5 {
+    font-weight: 800;
+    font-size: 1.5em;
+}
+
+#title-area {
+    max-width: 300px;
+    margin: auto;
+}
+
+#subtitle {
+    text-align: center;
+}
+
+#user-interface {
+    max-width: 1000px;
+    margin: auto;
+    max-height: 70px;
+    text-align: center;
+}
+
+.ui-control {
+    margin-top: 10px;
+    padding: .375rem .75rem;
+    height: 40px;
+}
+
+#main-table {
+    border-collapse: separate;
+}
+
+th {
+    padding: 0.8em 1.5em 0.8em 1.5em;
+    text-shadow: 0.5px 0.5px 0.2px #afafaf85;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 10px;
+    vertical-align: initial;
+}
+
+td:first-child {
+    font-size: 1.4em;
+    color: rgb(255, 115, 0);
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-align: center;
+    color: rgb(255, 205, 39);
+    font-family: Helvetica;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+// button styling
+@keyframes draw1 {
+    0% {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 700;
+        stroke-width: 4px;
+    }
+    75% {
+        stroke-dasharray: 900;
+        stroke-width: 1px;
+    }
+    100% {
+        stroke-dasharray: 900;
+        stroke-width: 1px;
+    }
+}
+
+@keyframes draw2 {
+    0% {
+        stroke-dashoffset: 350;
+        stroke-dasharray: 350;
+    }
+    50% {
+        stroke-dashoffset: 600;
+        stroke-dasharray: 400;
+        stroke-width: 1px;
+    }
+    100% {
+        stroke-dashoffset: 900;
+        stroke-dasharray: 400;
+        stroke-width: 1px;
+    }
+}
+
+@keyframes draw3 {
+    100% {
+        transform: scale(1.35);
+    }
+}
+
+.highlight .button {
+    display: inline-block;
+    color: #fff;
+    background: darkred;
+    margin-top: 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+}
+
+.highlight .button:before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -80px;
+    height: 100px;
+    width: 70px;
+    background: rgba(255, 255, 255, .7);
+    transform: rotate(20deg);
+}
+
+.highlight .button:hover:before {
+    left: 150px;
+    transition: all .5s;
+    text-decoration: underline;
+}
+
+.highlight {
+    margin-bottom: 100px;
+}
+
+.highlight .page-button {
+    background: rgb(54, 131, 255);
+}
+
+$breakpoint-alpha: 480px;
+.rwd-table {
+    margin: 1em 0;
+    min-width: 300px;
+    tr {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        display: none; 
+    }
+    td {
+        display: block;
+        &:first-child {
+            padding-top: .5em;
+        }
+        &:last-child {
+            padding-bottom: .5em;
+        }
+        &:before {
+            content: attr(data-th)": ";
+            font-weight: bold;
+            width: 6.5em;
+            display: inline-block; // end options
+            @media (min-width: $breakpoint-alpha) {
+                display: none;
+            }
+        }
+    }
+    th,
+    td {
+        text-align: left;
+        @media (min-width: $breakpoint-alpha) {
+            display: table-cell;
+            padding: .25em .5em;
+            &:first-child {
+                padding-left: 0;
+            }
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+.rwd-table {
+    background: #34495E;
+    color: #fff;
+    border-radius: .4em;
+    overflow: hidden;
+    tr {
+        border-color: lighten(#34495E, 10%);
+    }
+    th,
+    td {
+        margin: .5em 1em;
+        @media (min-width: $breakpoint-alpha) {
+            padding: 1em !important;
+        }
+    }
+    th,
+    td:before {
+        color: #dd5;
+    }
+}
