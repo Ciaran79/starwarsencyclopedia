@@ -4,6 +4,7 @@ var baseUrl = "https://swapi.co/api/";
 var category = document.getElementById('category');
 var searchBox = document.getElementById('search-box');
 var searchForm = document.getElementById('search-form');
+var catData;
 
 
 $(document).ready(function () {
@@ -31,8 +32,6 @@ $(document).ready(function () {
     });
 
    
-
- 
     function changePage(arg) {
 
         if (arg == "next") {
@@ -50,46 +49,51 @@ $(document).ready(function () {
         }
     }
 
-  
 
-    function getTitleFromLink() {
-        let table = document.getElementById('main-table');
-        let linkList = table.getElementsByTagName('a');
-        for (var m = 0; m < 2; m++) {
+
+    function getLinkData() {
+        // let suffix = cellTextContent.slice(baseUrl.length);
+        // let id = suffix.slice(suffix.indexOf('/'));
+        // let baseCategory = suffix.slice(0, suffix.indexOf('/'));
+        let categoryTypes = ['films', 'people', 'planets', 'species', 'starships', 'vehicles'];
+               
+        categoryTypes.forEach(element => {
+
+            var newUrl = baseUrl + element;
 
             $.ajax({
-
-                url: linkList[m].href,
-                async: false,
+    
+                url: newUrl,
+                type: "get",
+    
                 error: function () {
-                    alert('<p>An error has occurred</p>');
+                    // alert('<p>An error has occurred</p>');
                     console.log(status);
                 },
     
                 success: function (data, status) {
-
-                    if (data.name != null){
-                        linkList[m].innerHTML = data.name;
-                    }                          
-                    else {
-                        linkList[m].innerHTML = data.title;
-                        
+                    console.log(data);
+                    catData = data;
+                    var catLinkList = document.getElementById('main-table').getElementsByTagName('a');
+                    for (var n = 0; n < catLinkList.length; n++) {
+                        if (catLinkList[n].innerHTML.includes(element)){
+                            catLinkList[n].innerHTML = Object.values(catData.results[n])[0];
+                        }
                     }
-                   
+                    
                 }
-    
             });
-        }
+        });
+
        
+    }
 
-        
-    }  
-
+   
     function clearTable() {
-        let mainTable = $('#main-table');
-        if (typeof mainTable != "null") {
+        // // let mainTable = $('#main-table');
+        // if ((typeof mainTable !== "null") && (typeof mainTable !== "undefined")) {
             $('#main-table').remove();
-        }
+        
     }
 
     function getResults() {
@@ -122,6 +126,7 @@ $(document).ready(function () {
 
             url: combinedUrl,
 
+
             error: function () {
                 alert('<p>An error has occurred</p>');
                 console.log(status);
@@ -138,16 +143,15 @@ $(document).ready(function () {
 
                 var rows;
                 var headers;
-                if (typeof data.results === "undefined"){
+                if (typeof data.results === "undefined") {
                     rows = 1;
                     headers = Object.keys(data).length;
-                }
-                else {
+                } else {
                     rows = data.results.length;
                     headers = Object.keys(data.results[0]).length;
                 }
-                
-          
+
+
                 generate_table(headers, rows);
 
                 function generate_table(headers, rows) {
@@ -162,13 +166,12 @@ $(document).ready(function () {
                     tblBody.appendChild(firstRow);
 
                     var headerData;
-                    if (typeof data.results === "undefined"){
+                    if (typeof data.results === "undefined") {
                         headerData = Object.keys(data);
-                    }
-                    else {
+                    } else {
                         headerData = Object.keys(data.results[0]);
                     }
-                    
+
 
                     for (var k = 0; k < headers; k++) {
                         var tblHeader = document.createElement("th");
@@ -179,17 +182,17 @@ $(document).ready(function () {
                         tblBody.appendChild(tblHeader);
                     }
 
+
                     // creating all cells
                     for (var i = 0; i < rows; i++) {
                         var row = document.createElement("tr");
 
-                            var cellTextData;
-                            if(typeof data.results === "undefined"){
-                                cellTextData = data;
-                            }
-                            else {
-                                cellTextData = data.results[i];
-                            }
+                        var cellTextData;
+                        if (typeof data.results === "undefined") {
+                            cellTextData = data;
+                        } else {
+                            cellTextData = data.results[i];
+                        }
 
                         for (var j = 0; j < headers; j++) {
 
@@ -200,6 +203,7 @@ $(document).ready(function () {
                                 if (cellTextContent.includes("https://")) {
                                     let cellLink = document.createElement("a");
                                     cellLink.setAttribute('href', cellTextContent);
+
                                     cellLink.innerHTML = cellTextContent;
                                     cell.appendChild(cellLink);
                                 } else {
@@ -226,10 +230,9 @@ $(document).ready(function () {
                                     }
 
                                 }
-                       
                                 cellTextContent = extraObjectText;
-
                                 cell.appendChild(cellDiv);
+
                             } else {
                                 let cellText = document.createTextNode(cellTextContent);
                                 cell.appendChild(cellText);
@@ -237,25 +240,20 @@ $(document).ready(function () {
 
                             row.appendChild(cell);
                         }
-
-                        // add the row to the end of the table body
                         tblBody.appendChild(row);
-
                     }
-
-                    // put the <tbody> in the <table>
                     tbl.appendChild(tblBody);
                     main.appendChild(tbl);
-                    // sets the border attribute of tbl to 2;
                     tbl.setAttribute("border", "2");
                     tbl.setAttribute('id', 'main-table');
                     tbl.setAttribute('class', 'rwd-table');
                 }
-                // getTitleFromLink();
-                $('table a').click(function(e){
+                $('table a').click(function (e) {
                     e.preventDefault();
                     displayArticles(this.href);
-                }); 
+                });
+
+                getLinkData();
 
             },
         });
